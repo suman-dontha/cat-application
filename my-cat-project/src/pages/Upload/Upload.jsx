@@ -1,11 +1,10 @@
-//
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import { useUploadCatImageMutation } from '../../api/catApi';
 import { useDispatch } from 'react-redux';
 import { addCatImage } from '../../features/catSlice';
+import { Link } from 'react-router-dom';
 
 export const Upload = () => {
     const [ file, setFile ] = useState(null);
@@ -57,14 +56,17 @@ export const Upload = () => {
             <NavBar />
             <main>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-bold text-gray-900">Upload</h1>
-                    <p className="mt-2 text-sm text-gray-500">Upload your cat images here.</p>
-                    <div className="mt-4">
-                        <input
-                            type="file"
-                            onChange={handleFileChange}
-                            className="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Upload a Cat Image</h2>
+                    <p className="mt-4 text-gray-500">
+                        Any uploads must comply with the{' '}
+                        <Link to="https://thecatapi.com/privacy" className="text-indigo-600">
+                            {' '}
+                            upload guidelines
+                        </Link>{' '}
+                        or face deletion.
+                    </p>
+                    <div className="mt-4 border-t-[1px] border-gray-200 py-6">
+                        <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} />
                         <button
                             onClick={handleUpload}
                             className="mt-4 bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600"
